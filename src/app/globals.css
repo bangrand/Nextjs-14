@@ -376,3 +376,13 @@ input {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
+
+/* 
+ * modal buttons
+*/
+
+.button-group {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}

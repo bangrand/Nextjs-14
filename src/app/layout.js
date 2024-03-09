@@ -1,5 +1,6 @@
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 const fira = Fira_Code({ subsets: ["latin"] });
 
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={fira.className}>
-                <div id="root">{children}</div>
+                <div id="root">
+                    <Providers>{children}</Providers>
+                </div>
             </body>
         </html>
     );

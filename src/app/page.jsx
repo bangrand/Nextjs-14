@@ -92,16 +92,26 @@ const Home = () => {
 
     return (
         <div className="board">
-            <BoardLogo />
-            <div className="main-board">
-                {ready && (
-                    <DragDropContext onDragEnd={onDragEnd}>
-                        <Board idx={0} title="Unfinished" tasks={state[0]} />
-                        <Board idx={1} title="In Progress" tasks={state[1]} />
-                        <Board idx={2} title="Done" tasks={state[2]} />
-                    </DragDropContext>
-                )}
-            </div>
+            {ready && (
+                <>
+                    <BoardLogo />
+                    <div className="main-board">
+                        <DragDropContext onDragEnd={onDragEnd}>
+                            <Board
+                                idx={0}
+                                title="Unfinished"
+                                tasks={state[0]}
+                            />
+                            <Board
+                                idx={1}
+                                title="In Progress"
+                                tasks={state[1]}
+                            />
+                            <Board idx={2} title="Done" tasks={state[2]} />
+                        </DragDropContext>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

@@ -2,81 +2,83 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const TaskForm = (props) => {
-    const [title, setNewTitle] = useState("");
-    const [description, setNewDescription] = useState("");
-    const [dueDate, setNewDueDate] = useState("");
-    const [tags, setNewTags] = useState("");
+  const [title, setNewTitle] = useState("");
+  const [description, setNewDescription] = useState("");
+  const [dueDate, setNewDueDate] = useState("");
+  const [tags, setNewTags] = useState("");
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        if (!title || !description || !dueDate || !tags) return;
+    if (!title || !description || !dueDate || !tags) return;
 
-        const tagsArray = tags.split(",").map((tag) => tag.trim());
+    const tagsArray = tags.split(",").map((tag) => tag.trim());
 
-        const id = crypto.randomUUID();
-        const newTask = {
-            id,
-            title,
-            description,
-            dueDate,
-            tags: tagsArray,
-        };
-        props.onSubmit(newTask);
-        setNewTitle("");
-        setNewDescription("");
-        setNewDueDate("");
-        setNewTags("");
+    const id = crypto.randomUUID();
+    const newTask = {
+      id,
+      title,
+      description,
+      dueDate,
+      tags: tagsArray,
     };
+    props.onSubmit(newTask);
+    setNewTitle("");
+    setNewDescription("");
+    setNewDueDate("");
+    setNewTags("");
+  };
 
-    return (
-        <>
-            <form className="login-form form-add-task">
-                <div className="user-box">
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setNewTitle(e.target.value)}
-                        required
-                    />
-                    <label>📑Title</label>
-                </div>
+  return (
+    <>
+      <form className="login-form form-add-task">
+        <div className="user-box">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setNewTitle(e.target.value)}
+            required
+          />
+          <label>📑Title</label>
+        </div>
 
-                <div className="user-box">
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setNewDescription(e.target.value)}
-                        required
-                    />
-                    <label>📃Description</label>
-                </div>
+        <div className="user-box">
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setNewDescription(e.target.value)}
+            required
+          />
+          <label>📃Description</label>
+        </div>
 
-                <div className="user-box">
-                    <input
-                        type="text"
-                        value={tags}
-                        onChange={(e) => setNewTags(e.target.value)}
-                        required
-                    />
-                    <label>🏷️Tags</label>
-                </div>
+        <div className="user-box">
+          <input
+            type="text"
+            value={tags}
+            onChange={(e) => setNewTags(e.target.value)}
+            required
+          />
+          <label>🏷️Tags</label>
+        </div>
 
-                <button className="button-submit" type="submit">
-                    Submit
-                </button>
-            </form>
-            <button className="button-cancel">Cancel</button>
-        </>
-    );
+        <button className="button-submit" type="submit">
+          Submit
+        </button>
+      </form>
+      <button onClick={props.onCloseModal} className="button-cancel">
+        Cancel
+      </button>
+    </>
+  );
 };
 
 TaskForm.propTypes = {
-    title: PropTypes.string,
-    description: PropTypes.string,
-    dueDate: PropTypes.string,
-    tags: PropTypes.array,
-    onSubmit: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  dueDate: PropTypes.string,
+  tags: PropTypes.array,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default TaskForm;

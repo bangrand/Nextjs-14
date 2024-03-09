@@ -1,32 +1,36 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
 import Board from "@/components/Board/Board";
 import BoardLogo from "@/components/BoardLogo";
+import { move, reorder } from "@/utils/dragDrop";
 
 const tasks = [
     {
         id: "118836",
-        title: "FE",
+        title: "Tugas FE",
         description: "Menggunakan Framework",
         dueDate: "2022-03-25",
         tags: ["FE", "RPL"],
     },
     {
         id: "118837",
-        title: "BE",
+        title: "Tugas BE",
         description: "Membuat API",
         dueDate: "2022-03-25",
         tags: ["BE", "RPL"],
     },
     {
         id: "118838",
-        title: "UI/UX",
+        title: "Tugas UI/UX",
         description: "Membuat UI/UX",
         dueDate: "2022-03-25",
         tags: ["UI", "UX"],
     },
     {
         id: "118839",
-        title: "Game Dev",
+        title: "Tugas Game Dev",
         description: "Membuat game",
         dueDate: "2022-03-25",
         tags: ["GIGA", "Game"],
@@ -48,13 +52,55 @@ const tasks = [
 ];
 
 const Home = () => {
+    const [ready, setReady] = useState(false);
+    const [state, setState] = useState([
+        tasks.slice(0, 2),
+        tasks.slice(2, 4),
+        tasks.slice(4, 6),
+    ]);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setReady(true);
+        }
+    }, []);
+
+    const onDragEnd = (result) => {
+        const { source, destination } = result;
+
+        // dropped outside the list
+        if (!destination) {
+            return;
+        }
+        const sInd = +source.droppableId;
+        const dInd = +destination.droppableId;
+
+        if (sInd === dInd) {
+            const items = reorder(state[sInd], source.index, destination.index);
+            const newState = [...state];
+            newState[sInd] = items;
+            setState(newState);
+        } else {
+            const result = move(state[sInd], state[dInd], source, destination);
+            const newState = [...state];
+            newState[sInd] = result[sInd];
+            newState[dInd] = result[dInd];
+
+            setState(newState.filter((group) => group.length));
+        }
+    };
+
     return (
         <div className="board">
             <BoardLogo />
             <div className="main-board">
-                <Board title="Unfinished" tasks={tasks} />
-                <Board title="In Progress" tasks={tasks} />
-                <Board title="Done" tasks={tasks} />
+                {ready && (
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Board idx={0} title="Unfinished" tasks={state[0]} />
+                        <Board idx={1} title="In Progress" tasks={state[1]} />
+                        <Board idx={2} title="Done" tasks={state[2]} />
+                    </DragDropContext>
+                )}
             </div>
         </div>
     );

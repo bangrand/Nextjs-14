@@ -37,60 +37,60 @@ const Register = () => {
 
   return (
     <div id={isRegisterPage ? "register-root" : ""}>
-      <div className="card">
-        <div className="login-header-text">
-          <h6 className="login-text">Sign Up to continue</h6>
+      <div className='card'>
+        <div className='login-header-text'>
+          <h6 className='login-text'>Sign Up to continue</h6>
         </div>
-        <form className="login-form form-add-task" onSubmit={handleSubmit}>
-          <div className="user-box">
+        <form className='login-form form-add-task' onSubmit={handleSubmit}>
+          <div className='user-box'>
             <input
               onChange={handleChange}
-              name="username"
-              type="text"
+              name='username'
+              type='text'
               required
               value={fields.username}
             />
             <label>Username</label>
           </div>
-          <div className="user-box">
+          <div className='user-box'>
             <input
               onChange={handleChange}
-              name="name"
-              type="text"
+              name='name'
+              type='text'
               required
               value={fields.name}
             />
             <label>Name</label>
           </div>
-          <div className="user-box">
+          <div className='user-box'>
             <input
               onChange={handleChange}
-              name="email"
+              name='email'
               value={fields.email}
-              type="text"
+              type='text'
               required
             />
             <label>Email</label>
           </div>
-          <div className="user-box">
+          <div className='user-box'>
             <input
               onChange={handleChange}
-              name="password"
-              type="password"
+              name='password'
+              type='password'
               required
               value={fields.password}
             />
             <label>Password</label>
           </div>
-          <button className="button-submit">
+          <button className='button-submit'>
             Register
-            <div className="arrow-wrapper">
-              <div className="arrow"></div>
+            <div className='arrow-wrapper'>
+              <div className='arrow'></div>
             </div>
           </button>
         </form>
-        <p className="text-color-1">
-          Already have a Board account? <Link href="login">Log in</Link>
+        <p className='text-color-1'>
+          Already have a Board account? <Link href='login'>Log in</Link>
         </p>
       </div>
     </div>

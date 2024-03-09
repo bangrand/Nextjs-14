@@ -69,6 +69,7 @@ const Home = () => {
         },
     });
 
+<<<<<<< Updated upstream
     const handleSubmitAddTask = async (data) => {
         await addTaskMutate(data);
         await refetch();
@@ -156,6 +157,24 @@ const Home = () => {
             )}
         </div>
     );
+=======
+  return (
+    <div className='board'>
+      {ready && (
+        <>
+          <Navbar user={user.isSuccess} />
+          <div className='main-board'>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Board idx={0} title='Unfinished' tasks={state[0]} />
+              <Board idx={1} title='In Progress' tasks={state[1]} />
+              <Board idx={2} title='Done' tasks={state[2]} />
+            </DragDropContext>
+          </div>
+        </>
+      )}
+    </div>
+  );
+>>>>>>> Stashed changes
 };
 
 export default Home;

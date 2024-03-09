@@ -1,7 +1,6 @@
 import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-import Navbar from "@/components/Navbar/Navbar";
 
 const fira = Fira_Code({ subsets: ["latin"] });
 
@@ -12,10 +11,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={fira.className}>
-        <div id="root">
-          <Navbar />
+        <div id='root'>
           <Providers>{children}</Providers>
         </div>
       </body>
